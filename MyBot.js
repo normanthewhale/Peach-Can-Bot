@@ -19,7 +19,7 @@ game.initialize().then(async () => {
         const commandQueue = [];
 
         for (const ship of me.getShips()) {
-            if (ship.haliteAmount > hlt.constants.MAX_HALITE / 2) {
+            if (ship.haliteAmount > hlt.constants.MAX_HALITE * 0.75) {
                 const destination = me.shipyard.position;
                 const safeMove = gameMap.naiveNavigate(ship, destination);
                 commandQueue.push(ship.move(safeMove));
@@ -32,7 +32,7 @@ game.initialize().then(async () => {
             }
         }
 
-        if (game.turnNumber < 0.75 * hlt.constants.MAX_TURNS &&
+        if (game.turnNumber < 0.6 * hlt.constants.MAX_TURNS &&
             me.haliteAmount >= hlt.constants.SHIP_COST &&
             !gameMap.get(me.shipyard).isOccupied) {
             commandQueue.push(me.shipyard.spawn());
